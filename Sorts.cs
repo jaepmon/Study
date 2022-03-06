@@ -118,4 +118,42 @@ public class Sorts : MonoBehaviour
             print(array[index]);
         }
     }
+    void Quick2(int[] arr, int start, int end)
+    {
+        if (start >= end)   // 원소가 1개일때
+            return;
+
+        int pivot = start;  // 피봇 값
+        int i = start + 1;
+        int j = end;
+
+        while (i <= j)// 엇갈릴 때까지 반복
+        {
+            while(arr[i] <= arr[pivot])// 피봇 값보다 큰 값을 만날 때까지
+            {
+                i++;
+            }
+
+            while(j > start && arr[j] >= arr[pivot])// 피봇 값보다 작은 값을 만날 때까지
+            {
+                j--;
+            }
+
+            if(i > j)// 현재 엇갈린 상태면 피봇 값과 교체
+            {
+                temp = arr[j];
+                arr[j] = arr[pivot];
+                arr[pivot] = temp;
+            }
+            else
+            {
+                temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
+            }
+
+            Quick2(arr, start, j - 1);
+            Quick2(arr, j + 1, end);
+        }
+    }
 }
