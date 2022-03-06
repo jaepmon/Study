@@ -6,7 +6,7 @@ public class Sorts : MonoBehaviour
 {
     int min, index, temp;
     int[] array = { 2, 4, 7, 8, 9, 6, 5, 3, 1, 10 };
-
+    int[] a;
     private void Start()
     {
         //Selection();
@@ -156,4 +156,55 @@ public class Sorts : MonoBehaviour
             Quick2(arr, j + 1, end);
         }
     }
+
+    void Merge(int[] arr, int m, int middle, int n)
+    {
+        int i = m;
+        int j = middle + 1;
+        int k = m;
+
+        //¹è¿­¿¡ »ðÀÔ
+        while(i <= middle && j <= n)
+        {
+            if(arr[i] <= arr[j])
+            {
+                a[k] = arr[i];
+                i++;
+            }
+            else
+            {
+                a[k] = arr[j];
+                j++;
+            }
+            k++;
+        }
+        if(i > middle)
+        {
+            for(int t = j; t <= n; t++)
+            {
+                a[k] = arr[t];
+                k++;
+            }
+        }
+        else
+        {
+            for (int t = i; t <= n; t++)
+            {
+                a[k] = arr[t];
+                k++;
+            }
+        }
+    }
+    void mergeSort(int[] a, int m, int n)
+    {
+        if(m < n)
+        {
+            int middle = (m + n) / 2;
+            mergeSort(a, m, middle);
+            mergeSort(a, middle + 1, n);
+            Merge(a, m, middle, n);
+        }
+    }
+
+
 }
